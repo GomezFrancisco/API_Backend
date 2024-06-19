@@ -8,17 +8,17 @@ from .serializers import LibroSerializer, AutorSerializer, EditorialSerializer
 
 
 def get_all_libros():
-    libros = Libro.objects.all().order_by('nombre')
+    libros = Libro.objects.all().order_by('titulo')
     serializer = LibroSerializer(libros, many=True)
     return serializer.data
 
 def get_all_autores():
-    autores = Autor.objects.all().order_by('titulo')
+    autores = Autor.objects.all().order_by('nombre')
     serializer = AutorSerializer(autores, many=True)
     return serializer.data
 
 def get_all_editoriales():
-    editoriales = Editorial.objects.all().order_by('titulo')
+    editoriales = Editorial.objects.all().order_by('nombre')
     serializer = EditorialSerializer(editoriales, many=True)
     return serializer.data
 
@@ -35,17 +35,15 @@ def editoriales_rest(request):
     editoriales = get_all_editoriales()
     return JsonResponse(editoriales, safe=False)
 
-
 def Home(request):
     libros = Libro.objects.all()
-    autores = Autor.objects.all()
-    editoriales = Editorial.objects.all()
+    autores = get_all_autores()
+    editoriales = get_all_editoriales()
     return render(request, 'home.html', {
         'Libros': libros,
         'Autores': autores,
         'Editoriales': editoriales,
     })
-
 
 class NuevoLibro(CreateView):
     model = Libro
