@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Biblioteca</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .card {
+        transition: transform 0.3s ease;
+      }
+
+      .card:hover {
+        transform: scale(1.05);
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-100">
+    <nav class="bg-red-500 p-4 shadow-lg">
+      <div class="container mx-auto flex justify-between items-center">
+        <h1>
+          <a
+            href="{% url 'home' %}"
+            class="text-white hover:text-gray-200 transition-colors font-bold"
+            >UADER - Biblioteca</a
+          >
+        </h1>
+        <ul class="flex space-x-4">
+          <li>
+            <a
+              href="{% url 'nuevo_libro' %}"
+              class="text-white hover:text-gray-200 transition-colors"
+              >+ Libro</a
+            >
+          </li>
+          <li>
+            <a
+              href="{% url 'nuevo_autor' %}"
+              class="text-white hover:text-gray-200 transition-colors"
+              >+ Autor</a
+            >
+          </li>
+          <li>
+            <a
+              href="{% url 'nueva_editorial' %}"
+              class="text-white hover:text-gray-200 transition-colors"
+              >+ Editorial</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <div
+            class="card bg-white rounded-lg shadow-lg p-6"
+          >
+            <h2
+              class="text-2xl text-center font-semibold my-4 text-gray-500 cursor-pointer"
+            >
+              Libros
+            </h2>
+            <div id="libro">
+              <table
+                class="w-full table-auto border-collapse border border-gray-300 shadow-sm mt-6"
+              >
+                <thead>
+                  <tr class="bg-gray-200 text-gray-700">
+                    <th class="border border-gray-300 px-4 py-2 text-left">
+                      Título
+                    </th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">
+                      Género
+                    </th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">
+                      Año Publicación
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for libro in Libros %}
+                  <tr class="bg-white hover:bg-gray-100 transition-colors">
+                    <td class="border border-gray-300 px-4 py-2">
+                      {{ libro.titulo }}
+                    </td>
+                    <td class="border border-gray-300 px-4 py-2">
+                      {{ libro.genero }}
+                    </td>
+                    <td class="border border-gray-300 px-4 py-2">
+                        {{ libro.anio_publicacion }}
+                      </td>
+                  </tr>
+                  {% empty %}
+                  <tr>
+                    <td
+                      colspan="3"
+                      class="border border-gray-300 px-4 py-2 text-center text-gray-500"
+                    >
+                      No hay libros disponibles
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div
+            class="card bg-white rounded-lg shadow-lg p-6"
+          >
+            <h2
+              class="text-2xl text-center font-semibold my-4 text-gray-500 cursor-pointer"
+            >
+              Autores
+            </h2>
+            <div id="autores">
+              <table
+                class="w-full table-auto border-collapse border border-gray-300 shadow-sm mt-6"
+              >
+                <thead>
+                  <tr class="bg-gray-200 text-gray-700">
+                    <th class="border border-gray-300 px-4 py-2 text-left">
+                      Nombre
+                    </th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">
+                      Nacionalidad
+                    </th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">
+                      Año de Nacimiento
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for autor in Autores %}
+                  <tr class="bg-white hover:bg-gray-100 transition-colors">
+                    <td class="border border-gray-300 px-4 py-2">
+                      {{ autor.nombre }}
+                    </td>
+                    <td class="border border-gray-300 px-4 py-2">
+                      {{ autor.nacionalidad }}
+                    </td>
+                    <td class="border border-gray-300 px-4 py-2">
+                      {{ autor.anio_nacimiento }}
+                    </td>
+                  </tr>
+                  {% empty %}
+                  <tr>
+                    <td
+                      colspan="3"
+                      class="border border-gray-300 px-4 py-2 text-center text-gray-500"
+                    >
+                      No hay autores disponibles
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div
+            class="card bg-white rounded-lg shadow-lg p-6"
+          >
+            <h2
+              class="text-2xl text-center font-semibold my-4 text-gray-500 cursor-pointer"
+            >
+              Editoriales
+            </h2>
+            <div id="editoriales">
+              <table
+                class="w-full table-auto border-collapse border border-gray-300 shadow-sm mt-6"
+              >
+                <thead>
+                  <tr class="bg-gray-200 text-gray-700">
+                    <th class="border border-gray-300 px-4 py-2 text-left">
+                      Nombre
+                    </th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">
+                      Dirección
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for editorial in Editoriales %}
+                  <tr class="bg-white hover:bg-gray-100 transition-colors">
+                    <td class="border border-gray-300 px-4 py-2">
+                      {{ editorial.nombre }}
+                    </td>
+                    <td class="border border-gray-300 px-4 py-2">
+                      {{ editorial.direccion }}
+                    </td>
+                  </tr>
+                  {% empty %}
+                  <tr>
+                    <td
+                      colspan="3"
+                      class="border border-gray-300 px-4 py-2 text-center text-gray-500"
+                    >
+                      No hay editoriales disponibles
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
